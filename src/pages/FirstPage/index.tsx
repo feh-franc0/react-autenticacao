@@ -1,12 +1,14 @@
 import { useContext } from "react";
 import { AuthContext } from "../../contexts/Auth/AuthContext";
+import { NavigateMenu } from "../NavigateMenu";
 
-export const Private = () => {
+export const FirstPage = () => {
   const auth = useContext(AuthContext);
 
   return (
     <div>
-      <h2>Página Privada</h2>
+      <NavigateMenu />
+      <h2>PRIMEIRA PAGINA - https://randomuser.me/</h2>
 
       Olá {auth.user?.name}, bem vindo!
     </div>

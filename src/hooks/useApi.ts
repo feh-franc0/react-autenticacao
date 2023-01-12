@@ -13,12 +13,17 @@ export const useApi = () => ({
     }
   },
   signin: async (email: string, password: string) => {
-    // const response = await api.post('/signin', { email, password });
-    // return response.data;
+    const response = await api.post('/auth/login', { email, password });
+    console.log(response.data.token);
+    console.log(response.data.userData);
     return {
-      user: { id: 3, name: 'José', email: 'jose@gmail.com' },
-      token: '123456789'
-    }
+      user: response.data.userData,
+      token: response.data.token
+    };
+    // return {
+    //   user: { id: 3, name: 'José', email: 'jose@gmail.com' },
+    //   token: '123456789'
+    // }
   },
   logout: async () => {
     // const response = await api.post('/logout');

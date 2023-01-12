@@ -1,34 +1,67 @@
 import {useContext} from 'react';
 import './App.css';
 import { Route, Routes, Link, useNavigate } from 'react-router-dom';
-import { Home } from './pages/Home';
-import { Private } from './pages/Private';
+import { FirstPage } from './pages/FirstPage';
+import { SecondPage } from './pages/SecondPage';
 import { RequireAuth } from './contexts/Auth/RequireAuth';
 import { AuthContext } from './contexts/Auth/AuthContext';
+import { Login } from './pages/Login';
+import { NotFound } from './pages/NotFound';
+import { ThirdPage } from './pages/ThirdPage';
+import { FourthPage } from './pages/FourthPage';
 
 function App() {
-  const auth = useContext(AuthContext);
-  const navigate = useNavigate();
-
-  const handleLogout = async () => {
-    await auth.signout();
-    navigate('/');
-  }
 
   return (
     <div className="App">
-      <header>
-        <h1>Header do site</h1>
-        <nav>
-          <Link to="/">Home</Link>
-          <Link to="/private">Página Privada</Link>
-          {auth.user && <button onClick={handleLogout}>Sair</button>}
-        </nav>
-      </header>
-      <hr />
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/private" element={<RequireAuth><Private /></RequireAuth>} />
+
+        {/* not found */}
+        <Route path="*" element={<NotFound />} />
+
+        {/* Login page */}
+        <Route path="/" element={<Login />} />
+        
+        {/* primeira pagina */}
+        <Route 
+          path="/FirstPage" 
+          element={
+            <RequireAuth>
+              <FirstPage />
+            </RequireAuth>
+          } 
+        />
+        
+        {/*  segunda pagina */}
+        <Route 
+          path="/SecondPage" 
+          element={
+            <RequireAuth>
+              <SecondPage />
+            </RequireAuth>
+          } 
+        />
+        
+        {/*  terceia pagina */}
+        <Route 
+          path="/ThirdPage" 
+          element={
+            <RequireAuth>
+              <ThirdPage />
+            </RequireAuth>
+          } 
+        />
+        
+        {/* quarta pagina */}
+        <Route 
+          path="/FourthPage" 
+          element={
+            <RequireAuth>
+              <FourthPage />
+            </RequireAuth>
+          } 
+        />
+
       </Routes>
     </div>
   );
