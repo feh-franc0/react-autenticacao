@@ -6,20 +6,44 @@ import { NavigateMenu } from "../../components/NavigateMenu";
 
 export const FirstPage = () => {
   const auth = useContext(AuthContext);
-  console.log(auth)
-  
   const [posts, setPosts] = useState<any[]>([])
   const [currentPage, setCurrentPage] = useState<Number>(1);
   const [postsPerPage] = useState<Number>(10);
+  const [searchText, setSearchText] = useState<String>('');
+  const [data, setData] = useState<any[]>(posts);
 
   useEffect(() => {
     const fetchUsers = async () => {
       const res = await axios.get("https://randomuser.me/api/?results=100")
       setPosts(res.data.results);
+      setData(res.data.results);
     }
 
     fetchUsers()
   }, []);
+
+  
+
+  const handleSearch = (value: String) => {
+    console.log(value)
+    setSearchText(value)
+    filterPosts(value)
+  }
+
+  const filterPosts = (value: String) => {
+    const lowerCaseValue = value.toLowerCase().trim();
+    if(!lowerCaseValue) {
+      setPosts(data)
+      console.log("vazio")
+    }
+    else {
+      console.log("quando tem coisa escrita.")
+      const filteredPosts: any[] = [];
+      setPosts(filteredPosts)
+    }
+  }
+
+
 
   //* Get current user
   const indexOfLastPost = Number(currentPage) * Number(postsPerPage);
@@ -37,12 +61,6 @@ export const FirstPage = () => {
 
   const paginate = (pageNumber: Number) => setCurrentPage(pageNumber)
 
-  const [searchText, setSearchText] = useState<String>('');
-
-  const handleSearch = (value: String) => {
-    console.log(value)
-    setSearchText(value)
-  }
 
   return (
     <div>
@@ -71,6 +89,7 @@ export const FirstPage = () => {
             <p>{usuario.dob.age}</p>
           </div>
         ))}
+        {currentPosts.length === 0 && <span>nada foi encontrado</span>}
       </div>
 
       <nav>
