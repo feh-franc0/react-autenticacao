@@ -23,7 +23,7 @@ export const FirstPage = () => {
   }, []);
 
   const handleSearch = (value: String) => {
-    console.log(value)
+    // console.log(value)
     setSearchText(value)
     filterPosts(value)
   }
@@ -35,7 +35,7 @@ export const FirstPage = () => {
       console.log("vazio")
     }
     else {
-      console.log("quando tem coisa escrita.")
+      // console.log("quando tem coisa escrita.")
       const excludeColumns: String[] = ['cell','phone'];
       //! Esta retornando os valores das primeitas chaves n varredo os indices dentro do objeto por completo!!!
       const filteredPosts: any[] = data.filter(item => {
@@ -43,7 +43,7 @@ export const FirstPage = () => {
           return excludeColumns.includes(key) ? false : item[key].toString().toLowerCase().includes(lowerCaseValue);
         })
       });
-      console.log(filteredPosts)
+      // console.log(filteredPosts)
       setPosts(filteredPosts)
     }
   }
@@ -55,7 +55,7 @@ export const FirstPage = () => {
   const indexOfFirstPost = indexOfLastPost - Number(postsPerPage);
   const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost)
 
-  console.log(posts)
+  // console.log(posts)
   // console.log(currentPosts)
 
   const pageNumbers = [];
