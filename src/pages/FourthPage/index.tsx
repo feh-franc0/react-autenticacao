@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { AuthContext } from "../../contexts/Auth/AuthContext";
-import { NavigateMenu } from "../NavigateMenu";
+import { NavigateMenu } from "../../components/NavigateMenu";
 
 export const FourthPage = () => {
   const auth = useContext(AuthContext);
