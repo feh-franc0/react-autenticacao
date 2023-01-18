@@ -1,36 +1,38 @@
 import { useContext, useState } from "react";
-import { AuthContext } from "../../contexts/Auth/AuthContext";
+import { useNavigate } from "react-router-dom";
+// import { AuthContext } from "../../contexts/Auth/AuthContext";
 import { NavigateMenu } from "../../components/NavigateMenu";
-import imageCatNotFound from "./../../image/catHttpNotFound.png";
+import imageCatNotFound from "./../../image/catHttpNotFound.jpeg";
 
 export const SecondPage = () => {
-  const auth = useContext(AuthContext);
-  
-  const [searchText, setSearchText] = useState<String>('');
 
-  const handleSearchCatHttp = (value: String) => {
-    setSearchText(value);
-    console.log(value);
-  }
+      const [code, setCode] = useState('');
+      const navigate = useNavigate();
 
-  return (
-    <div>
-      <NavigateMenu />
-      <h2>SEGUNDA PAGINA - HTTP Cat </h2>
+      return (
+        <div className="cat-main-container">
+          
+            <h2>SEGUNDA PAGINA - HTTP Cat </h2>
+            <NavigateMenu />
 
-      <div>
-        <div>
-          <h2>Enjoy the kitty</h2>
-          <input
-            type="text" 
-            placeholder="Search" 
-            value={String(searchText)}
-            onChange={e => handleSearchCatHttp(e.target.value)}
-          />
-          <hr />
-          <img src={imageCatNotFound} alt="" />
+            <div className="cat-container">
+            <img
+            src={code ? `https://http.cat/${code}` : imageCatNotFound}
+            alt="cat"
+            />
+            <label htmlFor="status-code">
+              Digite um status code HTTP
+              <input 
+              type="number" 
+              placeholder="Ex. 200, 201, 202..." 
+              name="status-code"
+              className='form-control'
+              id="status-code"
+              value={code}
+              onChange={(e) => setCode(e.currentTarget.value)}
+              />
+            </label>
+          </div>
         </div>
-      </div>
-    </div>
-  );
+      )
 }

@@ -79,6 +79,7 @@ export const FirstPage = () => {
           value={String(searchText)}
           onChange={e => handleSearch(e.target.value)}
         />
+        <span>buscar usuários por nome, email ou username</span>
       </div>
 
       <h2>PRIMEIRA PAGINA - https://randomuser.me/</h2>

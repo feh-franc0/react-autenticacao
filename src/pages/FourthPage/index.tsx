@@ -8,7 +8,13 @@ export const FourthPage = () => {
   return (
     <div>
       <NavigateMenu />
+
+      
       <h2>QUARTA PAGINA - Crud </h2>
+
+      <div>
+        <strong>testando div</strong>
+      </div>
 
       Olá {auth.user?.name}, bem vindo!
     </div>
